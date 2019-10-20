@@ -1,28 +1,17 @@
 module.exports = {
-  // yarn sequelize migration:create --name=students
+  // yarn sequelize migration:create --name=plans
   // yarn sequelize db:migrate
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('students', {
+    return queryInterface.createTable('plans', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      peso: {
-        type: Sequelize.DECIMAL(10, 2),
-        allowNull: false,
-      },
-      altura: {
+      title: { type: Sequelize.STRING, allowNull: false, unique: true },
+      duration: { type: Sequelize.INTEGER, allowNull: false },
+      price: {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
       },
@@ -38,6 +27,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('students');
+    return queryInterface.dropTable('plans');
   },
 };

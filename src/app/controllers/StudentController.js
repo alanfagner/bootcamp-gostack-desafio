@@ -3,12 +3,9 @@ import Student from '../models/Student';
 
 class StudentsController {
   async index(req, res) {
-    try {
-      const students = await Student.findAll();
-      return res.json(students);
-    } catch (err) {
-      return res.status(500).json({ error: 'Contact system admin' });
-    }
+    const students = await Student.findAll();
+
+    return res.json(students);
   }
 
   async store(req, res) {
@@ -33,13 +30,9 @@ class StudentsController {
       return res.status(400).json({ error: 'Student already exists' });
     }
 
-    try {
-      const student = await Student.create(req.body);
+    const student = await Student.create(req.body);
 
-      return res.status(201).json(student);
-    } catch (err) {
-      return res.status(500).json({ error: 'Contact system admin' });
-    }
+    return res.status(201).json(student);
   }
 
   async update(req, res) {
@@ -68,13 +61,9 @@ class StudentsController {
       return res.status(400).json({ error: 'Student does not exist' });
     }
 
-    try {
-      await student.update({ name, email, peso, altura });
+    await student.update({ name, email, peso, altura });
 
-      return res.json(student);
-    } catch (err) {
-      return res.status(500).json({ error: 'Contact system admin' });
-    }
+    return res.json(student);
   }
 }
 export default new StudentsController();
