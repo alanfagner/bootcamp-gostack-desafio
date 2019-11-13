@@ -10,6 +10,14 @@ class HelpOrderController {
   async index(req, res) {
     const { student_id } = req.params;
 
+    if (!student_id) {
+      const heps = await HelpOrder.findAll({
+        include: [{ model: Student, as: 'student', attributes: ['name'] }],
+      });
+
+      return res.json(heps);
+    }
+
     const helpOrders = await HelpOrder.findAll({ where: { student_id } });
 
     return res.json(helpOrders);
@@ -33,6 +41,8 @@ class HelpOrderController {
   }
 
   async update(req, res) {
+    console.log(req.body);
+
     const schema = Yup.object().shape({
       answer: Yup.string().required(),
     });
