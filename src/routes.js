@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import SessionController from './app/controllers/SessionController';
 import StudentController from './app/controllers/StudentController';
+import SessionStudentController from './app/controllers/SessionStudentController';
 import PlanController from './app/controllers/PlanController';
 import EnrollmentController from './app/controllers/EnrollmentController';
 import CheckinController from './app/controllers/CheckinController';
@@ -13,6 +14,7 @@ import { isAdmin } from './app/middlewares/validation';
 const routes = new Router();
 
 routes.post('/sessions', SessionController.store);
+routes.post('/sessions/student', SessionStudentController.store);
 
 routes.use(authMiddleware);
 
